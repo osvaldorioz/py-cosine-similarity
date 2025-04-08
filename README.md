@@ -170,18 +170,14 @@ La instrucción `double dot_product = vec1.dot(vec2);`:
 ---
 
 ### Consideraciones para la solución
-Tu implementación actual usa `all-MiniLM-L6-v2` en C++ con `pybind11` y `Eigen` para calcular la similitud de cosenos. Para integrar un modelo más potente:
-1. **Tamaño del embedding**:
-   - Si pasas de 384 a 768 dimensiones (como con `all-mpnet-base-v2` o `all-distilroberta-v1`), debes actualizar la definición de `vec1` y `vec2` en `get_cosine_similarity`:
+La implementación actual usa `all-MiniLM-L6-v2` en C++ con `pybind11` y `Eigen` para calcular la similitud de cosenos. Para integrar un modelo más potente:
+**Tamaño del embedding**:
+   - Si se cambia de 384 a 768 dimensiones (como con `all-mpnet-base-v2` o `all-distilroberta-v1`), se debe actualizar la definición de `vec1` y `vec2` en `get_cosine_similarity`:
      ```cpp
      Eigen::VectorXd vec1(buf.shape[1]); // buf.shape[1] será 768
      Eigen::VectorXd vec2(buf.shape[1]);
      ```
      El código actual ya usa `buf.shape[1]`, por lo que debería adaptarse automáticamente al tamaño del embedding del modelo.
-
-2. **Requisitos de hardware**:
-   - Modelos como `all-mpnet-base-v2` requieren más memoria y poder computacional. En tu entorno (`1 CPU core, 4 GB RAM` en contenedores), podrías experimentar latencia significativa (hasta 30-50 segundos por inferencia en CPU, según pruebas reportadas). Si es posible, considera usar una GPU o aumentar los recursos del contenedor.
-
 
 ### Recomendación
 - **Si se prioriza calidad**: Usa `all-mpnet-base-v2`. Es el más potente y versátil de los mencionados, ideal para tareas complejas de similitud semántica.
