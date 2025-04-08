@@ -119,6 +119,76 @@ La instrucción `double dot_product = vec1.dot(vec2);`:
 - Es un paso crítico para determinar la similitud de cosenos.
 - Usa la biblioteca `Eigen` para realizar la operación de manera eficiente en C++.
 
+
+### Modelos más potentes
+1. **all-mpnet-base-v2**:
+   - **Descripción**: Es considerado el modelo de mayor calidad general de `sentence-transformers`. Está basado en `MPNet` (de Microsoft) y genera embeddings de 768 dimensiones.
+   - **Ventajas**: Mejor precisión en tareas como búsqueda semántica, clustering y similitud de frases, gracias a su arquitectura más profunda y su entrenamiento en más de 1 mil millones de pares de frases.
+   - **Desventajas**: Es más pesado (~420 MB) y más lento que `all-MiniLM-L6-v2` (aproximadamente 5 veces más lento según la documentación de SBERT).
+   - **Implementación**: Solo se necesita cambiar el nombre del modelo en el constructor:
+     ```cpp
+     model = sentence_transformers.attr("SentenceTransformer")("all-mpnet-base-v2");
+     ```
+     Y ajustar el tamaño del vector en `Eigen::VectorXd` (de 384 a 768):
+     ```cpp
+     Eigen::VectorXd vec1(768);
+     Eigen::VectorXd vec2(768);
+     ```
+
+2. **all-MiniLM-L12-v2**:
+   - **Descripción**: Una versión más profunda de `all-MiniLM` con 12 capas (en lugar de 6), también con embeddings de 384 dimensiones.
+   - **Ventajas**: Ofrece mejor calidad que `all-MiniLM-L6-v2` sin aumentar el tamaño del embedding, siendo un punto intermedio entre ligereza y precisión.
+   - **Desventajas**: Más lento que `L6-v2`, pero menos que `all-mpnet-base-v2`.
+   - **Implementación**: Cambia el modelo en el constructor:
+     ```cpp
+     model = sentence_transformers.attr("SentenceTransformer")("all-MiniLM-L12-v2");
+     ```
+     No requiere cambios en el tamaño del vector (sigue siendo 384).
+
+3. **all-distilroberta-v1**:
+   - **Descripción**: Basado en `DistilRoBERTa`, un modelo destilado de RoBERTa, con embeddings de 768 dimensiones.
+   - **Ventajas**: Mayor capacidad para capturar matices semánticos que `all-MiniLM-L6-v2`, con un buen equilibrio entre tamaño y rendimiento.
+   - **Desventajas**: Más grande (~330 MB) y más exigente computacionalmente.
+   - **Implementación**: Similar a `all-mpnet-base-v2`, ajustando el tamaño a 768:
+     ```cpp
+     model = sentence_transformers.attr("SentenceTransformer")("all-distilroberta-v1");
+     Eigen::VectorXd vec1(768);
+     Eigen::VectorXd vec2(768);
+     ```
+
+4. **paraphrase-multilingual-mpnet-base-v2**:
+   - **Descripción**: Una versión multilingüe de `mpnet-base-v2`, con embeddings de 768 dimensiones, entrenada en datos paralelos de más de 50 idiomas.
+   - **Ventajas**: Ideal si se necesita soporte multilingüe robusto, con alta calidad en tareas de paráfrasis y similitud.
+   - **Desventajas**: Similar a `all-mpnet-base-v2` en tamaño y velocidad.
+   - **Implementación**: Igual que `all-mpnet-base-v2`:
+     ```cpp
+     model = sentence_transformers.attr("SentenceTransformer")("paraphrase-multilingual-mpnet-base-v2");
+     Eigen::VectorXd vec1(768);
+     Eigen::VectorXd vec2(768);
+     ```
+
+---
+
+### Consideraciones para la solución
+Tu implementación actual usa `all-MiniLM-L6-v2` en C++ con `pybind11` y `Eigen` para calcular la similitud de cosenos. Para integrar un modelo más potente:
+1. **Tamaño del embedding**:
+   - Si pasas de 384 a 768 dimensiones (como con `all-mpnet-base-v2` o `all-distilroberta-v1`), debes actualizar la definición de `vec1` y `vec2` en `get_cosine_similarity`:
+     ```cpp
+     Eigen::VectorXd vec1(buf.shape[1]); // buf.shape[1] será 768
+     Eigen::VectorXd vec2(buf.shape[1]);
+     ```
+     El código actual ya usa `buf.shape[1]`, por lo que debería adaptarse automáticamente al tamaño del embedding del modelo.
+
+2. **Requisitos de hardware**:
+   - Modelos como `all-mpnet-base-v2` requieren más memoria y poder computacional. En tu entorno (`1 CPU core, 4 GB RAM` en contenedores), podrías experimentar latencia significativa (hasta 30-50 segundos por inferencia en CPU, según pruebas reportadas). Si es posible, considera usar una GPU o aumentar los recursos del contenedor.
+
+
+### Recomendación
+- **Si se prioriza calidad**: Usa `all-mpnet-base-v2`. Es el más potente y versátil de los mencionados, ideal para tareas complejas de similitud semántica.
+- **Si se busca un equilibrio**: Probar `all-MiniLM-L12-v2`. Mejora `L6-v2` sin aumentar el tamaño del embedding, siendo más viable en tu entorno actual.
+- **Si se necesita multilenguaje**: Optar por `paraphrase-multilingual-mpnet-base-v2`.
+
+
 #### Resultado final
 El programa ahora:
 - Carga el modelo `all-MiniLM-L6-v2` en C++ al instanciar `CosineSimilarity`.
