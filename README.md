@@ -181,7 +181,7 @@ La implementación actual usa `all-MiniLM-L6-v2` en C++ con `pybind11` y `Eigen`
 
 ### Recomendación
 - **Si se prioriza calidad**: Usa `all-mpnet-base-v2`. Es el más potente y versátil de los mencionados, ideal para tareas complejas de similitud semántica.
-- **Si se busca un equilibrio**: Probar `all-MiniLM-L12-v2`. Mejora `L6-v2` sin aumentar el tamaño del embedding, siendo más viable en tu entorno actual.
+- **Si se busca un equilibrio**: Probar `all-MiniLM-L12-v2`. Mejora `L6-v2` sin aumentar el tamaño del embedding.
 - **Si se necesita multilenguaje**: Optar por `paraphrase-multilingual-mpnet-base-v2`.
 
 
