@@ -5,7 +5,7 @@
 El programa tiene como objetivo calcular la similitud de cosenos entre dos cadenas de texto ingresadas por el usuario, utilizando embeddings generados por un modelo de lenguaje (`all-MiniLM-L6-v2` de `sentence-transformers`) y realizando el cálculo en C++ para mayor eficiencia. La interfaz de usuario está en Python, mientras que la lógica pesada (generación de embeddings y cálculo de similitud) se trasladó a C++.
 
 #### Estructura general
-1. **Interfaz en Python (`test1.py`)**:
+1. **Interfaz en Python (`main.py`)**:
    - Solicita al usuario dos cadenas de texto.
    - Importa un módulo C++ (`cosine_module`) creado con `pybind11`.
    - Llama a una clase `CosineSimilarity` definida en C++ para obtener la similitud y muestra el resultado.
@@ -19,9 +19,6 @@ El programa tiene como objetivo calcular la similitud de cosenos entre dos caden
 
 3. **Configuración de compilación (`CMakeLists.txt`)**:
    - Utiliza CMake para compilar el módulo C++ como una biblioteca compartida (`cosine_module.so`), vinculando las dependencias necesarias (`pybind11` y `Eigen`).
-
-#### Evolución de la implementación
-La implementación pasó por varias iteraciones debido a errores y ajustes:
 
 #### Detalles técnicos
 - **Generación de embeddings**:
