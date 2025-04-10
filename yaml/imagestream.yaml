@@ -1,0 +1,8 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: cosine-similarity
+  namespace: osvaldorioz-1-dev
+spec:
+  lookupPolicy:
+    local: false

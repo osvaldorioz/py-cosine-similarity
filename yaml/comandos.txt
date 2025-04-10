@@ -1,0 +1,94 @@
+ 1633  curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz
+ 1634  tar -xvzf openshift-client-linux.tar.gz
+ 1635  ls
+ 1636  oc login --token=sha256~OrFx833O4p3LvakED2mIZhLJOIVuQr1xCQVXCPy36Fc --server=https://api.rm3.7wse.p1.openshiftapps.com:6443
+ 1637  ./oc login --token=sha256~OrFx833O4p3LvakED2mIZhLJOIVuQr1xCQVXCPy36Fc --server=https://api.rm3.7wse.p1.openshiftapps.com:6443
+ 1638  ./oc project osvaldorioz-1-dev
+ 1639  ./oc ls
+ 1640  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/buildconfig.yaml 
+ 1641  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/imagestream.yaml 
+ 1642  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml 
+ 1643  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/service.yaml 
+ 1644  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/route.yaml 
+ 1645  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1646  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/buildconfig.yaml 
+ 1647  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1648  ./oc get builds -n osvaldorioz-1-dev
+ 1649  ./oc import-image python:3.12-slim --from=docker.io/library/python:3.12-slim --confirm -n osvaldorioz-1-dev
+ 1650  ./oc apply -f buildconfig.yaml -n osvaldorioz-1-dev
+ 1651  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/buildconfig.yaml 
+ 1652  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1653  ./oc logs build/cosine-similarity-deployment-549ccf5fd-lzhvd -n osvaldorioz-1-dev
+ 1654  ./oc logs build/cosine-similarity-build-3 -n osvaldorioz-1-dev
+ 1655  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/buildconfig.yaml 
+ 1656  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/imagestream.yaml 
+ 1657  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml 
+ 1658  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/service.yaml 
+ 1659  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1660  ./oc get pods -n osvaldorioz-1-dev
+ 1661  ./oc describe pod cosine-similarity-deployment-549ccf5fd-fpsj4 -n osvaldorioz-1-dev
+ 1662  ./oc get builds -n osvaldorioz-1-dev
+ 1663  ./oc get is -n osvaldorioz-1-dev
+ 1664  ./oc get builds -n osvaldorioz-1-dev
+ 1665  ./oc get is -n osvaldorioz-1-dev
+ 1666  ./oc get is cosine-similarity -o yaml -n osvaldorioz-1-dev
+ 1667  ./oc logs build/cosine-similarity-build-4 -n osvaldorioz-1-dev
+ 1668  ./oc get is cosine-similarity -o yaml -n osvaldorioz-1-dev
+ 1669  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml 
+ 1670  ./oc run test-cosine --image=image-registry.openshift-image-registry.svc:5000/osvaldorioz-1-dev/cosine-similarity:latest --restart=Never -n osvaldorioz-1-dev --command -- /bin/bash -c "sleep 3600"
+ 1671  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/imagestream.yaml 
+ 1672  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1673  oc get pods -n osvaldorioz-1-dev
+ 1674  ./oc get pods -n osvaldorioz-1-dev
+ 1675  oc describe pod cosine-similarity-build-5-build -n osvaldorioz-1-dev
+ 1676  ./oc describe pod cosine-similarity-build-5-build -n osvaldorioz-1-dev
+ 1677  ./oc get pods -n osvaldorioz-1-dev
+ 1678  ./oc describe pod cosine-similarity-build-5-build -n osvaldorioz-1-dev
+ 1679  ./oc get is cosine-similarity -o yaml -n osvaldorioz-1-dev
+ 1680  oc get pods -n osvaldorioz-1-dev
+ 1681  ./oc get pods -n osvaldorioz-1-dev
+ 1682  ./oc get builds -n osvaldorioz-1-dev
+ 1683  ./oc logs -f build/cosine-similarity-build-5 -n osvaldorioz-1-dev
+ 1684  ./oc get is -n osvaldorioz-1-dev
+ 1685  ./oc get is cosine-similarity -o yaml -n osvaldorioz-1-dev
+ 1686  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml 
+ 1687  ./oc get pods -n osvaldorioz-1-dev
+ 1688  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml
+ 1689  ./oc get pods -n osvaldorioz-1-dev
+ 1690  ./oc describe pod cosine-similarity-deployment-85dfb56fd8-r44v8 -n osvaldorioz-1-dev
+ 1691  ./oc get is cosine-similarity -o yaml -n osvaldorioz-1-dev
+ 1692  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml
+ 1693  ./oc get pods -n osvaldorioz-1-dev
+ 1694  ./oc describe pod cosine-similarity-deployment-85974fc5b4-hglpw -n osvaldorioz-1-dev
+ 1695  oc logs cosine-similarity-deployment-85974fc5b4-hglpw -n osvaldorioz-1-dev
+ 1696  ./oc logs cosine-similarity-deployment-85974fc5b4-hglpw -n osvaldorioz-1-dev
+ 1697  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1698  ./oc logs -f build/cosine-similarity-build-6 -n osvaldorioz-1-dev
+ 1699  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1700  ./oc logs -f build/cosine-similarity-build-7 -n osvaldorioz-1-dev
+ 1701  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1702  ./oc logs -f build/cosine-similarity-build-8 -n osvaldorioz-1-dev
+ 1703  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml
+ 1704  oc get pods -n osvaldorioz-1-dev
+ 1705  ./oc get pods -n osvaldorioz-1-dev
+ 1706  oc logs cosine-similarity-deployment-7dcc7ddbb8-knvqg -n osvaldorioz-1-dev
+ 1707  ./oc logs cosine-similarity-deployment-7dcc7ddbb8-knvqg -n osvaldorioz-1-dev
+ 1708  ls
+ 1709  cd Documentos/
+ 1710  ls
+ 1711  ./oc login --token=sha256~bRSjzV8aayKzdOO0dtOB2-iTlI8cTg2uAJ7-bGzKbKA --server=https://api.rm3.7wse.p1.openshiftapps.com:6443
+ 1712  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1713  ./oc logs -f build/cosine-similarity-build-9 -n osvaldorioz-1-dev
+ 1714  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml
+ 1715  ./oc get pods -n osvaldorioz-1-dev
+ 1716  oc logs cosine-similarity-deployment-6f665ff5c6-rnn79 -n osvaldorioz-1-dev
+ 1717  ./oc logs cosine-similarity-deployment-6f665ff5c6-rnn79 -n osvaldorioz-1-dev
+ 1718  ./oc get pods -n osvaldorioz-1-dev
+ 1719  ./oc start-build cosine-similarity-build --from-dir=/home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity -n osvaldorioz-1-dev
+ 1720  ./oc logs -f build/cosine-similarity-build-10 -n osvaldorioz-1-dev
+ 1721  ./oc apply -f /home/hadoop/Documentos/cpp_programs/yamls/py-cosine-similarity/deployment.yaml
+ 1722  ./oc get pods -n osvaldorioz-1-dev
+ 1723  ./oc logs cosine-similarity-deployment-7c6448564-xfwzg -n osvaldorioz-1-dev
+ 1724  ./oc get pods -n osvaldorioz-1-dev
+ 1725  ./oc logs cosine-similarity-deployment-7c6448564-xfwzg -n osvaldorioz-1-dev
+ 1726  history

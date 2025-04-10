@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: cosine-similarity-route
+  namespace: osvaldorioz-1-dev
+spec:
+  to:
+    kind: Service
+    name: cosine-similarity-service
+  port:
+    targetPort: 8000
+  tls:
+    termination: edge

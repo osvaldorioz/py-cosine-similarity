@@ -1,0 +1,22 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: cosine-similarity-build
+  namespace: osvaldorioz-1-dev
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: cosine-similarity:latest
+  source:
+    type: Binary
+    binary: {}
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: python:3.12-slim
+      dockerfilePath: Dockerfile
+  triggers:
+    - type: ConfigChange
