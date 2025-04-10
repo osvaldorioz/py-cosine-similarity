@@ -9,14 +9,23 @@ spec:
       kind: ImageStreamTag
       name: cosine-similarity:latest
   source:
-    type: Binary
-    binary: {}
+    git:
+      uri: https://github.com/osvaldorioz/py-cosine-sim-ocp4.git
+      ref: main
+    type: Git
   strategy:
-    type: Docker
-    dockerStrategy:
+    sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: python:3.12-slim
-      dockerfilePath: Dockerfile
+        namespace: openshift
+        name: python:3.12-ubi9
+      env:
+      - name: PIP_NO_CACHE_DIR
+        value: "true"
+      - name: HF_HOME
+        value: "/opt/app-root/src/cache"
+      - name: APP_MODULE  # Añadido para especificar el módulo de la aplicación
+        value: "main:app"
   triggers:
-    - type: ConfigChange
+  - type: ConfigChange
+  - type: ImageChange
